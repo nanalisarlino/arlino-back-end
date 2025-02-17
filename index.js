@@ -1,9 +1,18 @@
 const http = require('http');
 const {hello, greetings} = require('./helloworld')
 const moment = require('moment')
-const express = require('express')
+const express = require('express');
+const morgan = require('morgan');
 const app = express()
 
+const log = (req, res, next) => {
+    console.log(
+        moment().format("h:mm:ss a" + " " + req.originalUrl + " " + req.ip
+        );
+    next();
+}
+
+//routing
 app.get('/', (req, res) => res.send('Hello World'))
 app.get('/about', (req, res) => res.status(200).json({
     status : 'success',
